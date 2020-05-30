@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import { getDeck } from "../utils/api";
+import {
+  getDeck,
+  clearNotifications,
+  setLocalNotification,
+} from "../utils/api";
 import { AppLoading } from "expo";
 
 export class Quiz extends Component {
@@ -35,16 +39,19 @@ export class Quiz extends Component {
   };
 
   nextQuestion = (correct) => {
+    clearNotifications().then(setLocalNotification);
     const { currentQuestion, totalQuestion } = this.state;
     if (currentQuestion < totalQuestion) {
       if (correct) {
         this.setState({
           currentQuestion: this.state.currentQuestion + 1,
           points: this.state.points + 1,
+          showAnswer: false,
         });
       } else {
         this.setState({
           currentQuestion: this.state.currentQuestion + 1,
+          showAnswer: false,
         });
       }
     }
@@ -189,11 +196,10 @@ export class Quiz extends Component {
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={[
-                styles.button,
-                { backgroundColor: "red", marginTop: 35 },
-              ]}
-              onPress={() => {this.props.navigation.goBack()}}
+              style={[styles.button, { backgroundColor: "red", marginTop: 35 }]}
+              onPress={() => {
+                this.props.navigation.goBack();
+              }}
             >
               <Text style={{ textAlign: "center", color: "#fff" }}>Exit</Text>
             </TouchableOpacity>

@@ -32,7 +32,7 @@ class NewDeck extends Component {
       saveDeckTitle(title);
       this.props.dispatch(addNewDeck(title));
       this.setState({ title: "" });
-      this.props.navigation.navigate("Decks");
+      this.props.navigation.navigate("DeckDetail", { title });
     }
   };
   render() {
@@ -55,6 +55,7 @@ class NewDeck extends Component {
           <TouchableOpacity
             style={Platform.OS === "ios" ? styles.iosBtn : styles.androidBtn}
             onPress={this.handleSubmit}
+            disabled={this.state.title === "" ? true : false}
           >
             <Text style={{ color: "white", textAlign: "center", fontSize: 18 }}>
               Submit

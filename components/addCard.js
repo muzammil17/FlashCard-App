@@ -39,12 +39,19 @@ class AddCard extends Component {
         answer: "",
         question: "",
       });
-    }
 
-    this.props.navigation.goBack();
+      this.props.navigation.goBack();
+    } else {
+      alert("plz fill up the form");
+    }
   };
 
   render() {
+    const { answer, question } = this.state;
+    let btnDiabled = true;
+    if (answer !== "" && question !== "") {
+      btnDiabled = false;
+    }
     return (
       <TouchableWithoutFeedback
         onPress={() => {
@@ -77,6 +84,7 @@ class AddCard extends Component {
           <TouchableOpacity
             style={Platform.OS === "ios" ? styles.iosBtn : styles.androidBtn}
             onPress={this.handleSubmit}
+            disabled={btnDiabled}
           >
             <Text style={{ color: "white", textAlign: "center", fontSize: 18 }}>
               Submit

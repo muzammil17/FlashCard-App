@@ -90,6 +90,7 @@ function MyStack() {
         }}
       >
         <Stack.Screen component={Tabs} name="Home" />
+
         <Stack.Screen
           component={DeckDetail}
           name="DeckDetail"
@@ -100,6 +101,7 @@ function MyStack() {
             };
           }}
         />
+
         <Stack.Screen
           component={AddCard}
           name="AddCard"

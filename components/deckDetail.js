@@ -24,7 +24,7 @@ class DeckDetail extends Component {
   };
 
   componentDidMount() {
-  //  clearNotifications().then(setLocalNotification);
+
     const { title } = this.props.route.params;
     getDeck(title)
       .then((res) => {
